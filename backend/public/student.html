@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - NWU</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .notification-item {
+            background-color: #e8f5e9;
+            border-left: 5px solid #006837;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .exam-question { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
+        .options label { display: block; padding: 5px; cursor: pointer; }
+        .options label:hover { background-color: #f9f9f9; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Student Portal</h1>
+        <p>Northwest University Online Exams</p>
+    </header>
+
+    <div class="container">
+        <a href="/" class="btn" style="background-color: #666; margin-bottom: 20px;">&larr; Exit Portal</a>
+
+        <div id="login-screen" class="card">
+            <h2>Student Login</h2>
+            <p>Enter your Registration Number to access exams.</p>
+            <input type="text" id="regInput" placeholder="e.g. UG21/001">
+            <button onclick="studentLogin()" class="btn">Login</button>
+        </div>
+
+        <div id="dashboard-screen" class="card hidden">
+            <h2>Welcome, <span id="student-name">Student</span></h2>
+            <p>Your Active Exams:</p>
+            <div id="notification-list"></div>
+        </div>
+
+        <div id="exam-screen" class="card hidden">
+            <h2 id="exam-title" style="color: #d9534f;">Exam in Progress</h2>
+            <div id="timer" style="float: right; font-weight: bold; color: #d9534f;">Time Remaining: 30:00</div>
+            <hr>
+            <form id="exam-form">
+                <div id="questions-container"></div>
+            </form>
+            <button onclick="submitExam()" class="btn" style="background-color: #d9534f; width: 100%; margin-top: 20px;">Submit Exam Paper</button>
+        </div>
+        
+        <div id="result-screen" class="card hidden" style="text-align: center;">
+            <h1 style="color: #006837;">Exam Submitted!</h1>
+            <p>Your answers have been recorded.</p>
+            <h2 id="score-display">Your Score: Calculating...</h2>
+            <button onclick="window.location.reload()" class="btn">Back to Dashboard</button>
+        </div>
+
+    </div>
+
+    <script>
+        let currentQuestions = []; 
+
+        // 1. LOGIN
+        async function studentLogin() {
+            const regNo = document.getElementById('regInput').value;
+            if(!regNo) return alert("Please enter Reg No");
+
+            const response = await fetch('/api/student-login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ regNo })
+            });
+            const data = await response.json();
+
+            if (data.error) {
+                alert(data.error);
+            } else {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('dashboard-screen').classList.remove('hidden');
+                document.getElementById('student-name').innerText = data.name;
+                
+                const list = document.getElementById('notification-list');
+                list.innerHTML = ''; 
+
+                if(data.notifications.length === 0) {
+                    list.innerHTML = '<p>No exams active for your courses right now.</p>';
+                } else {
+                    data.notifications.forEach(notif => {
+                        const div = document.createElement('div');
+                        div.className = 'notification-item';
+                        div.innerHTML = `
+                            <span><strong>${notif.course}</strong>: ${notif.message}</span>
+                            <button class="btn" style="margin:0; font-size: 0.8rem;" onclick="startExam('${notif.course}')">Take Exam</button>
+                        `;
+                        list.appendChild(div);
+                    });
+                }
+            }
+        }
+
+        // 2. START EXAM
+        async function startExam(courseCode) {
+            if(!confirm("Start " + courseCode + " exam now?")) return;
+
+            const response = await fetch('/api/get-exam/' + courseCode);
+            currentQuestions = await response.json(); 
+
+            document.getElementById('dashboard-screen').classList.add('hidden');
+            document.getElementById('exam-screen').classList.remove('hidden');
+            document.getElementById('exam-title').innerText = "Exam: " + courseCode;
+
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+            
+            currentQuestions.forEach((q, index) => {
+                const html = `
+                    <div class="exam-question">
+                        <h3>Question ${index + 1}</h3>
+                        <p>${q.question}</p>
+                        <div class="options">
+                            <label><input type="radio" name="q_${q.id}" value="A"> A) ${q.options[0]}</label>
+                            <label><input type="radio" name="q_${q.id}" value="B"> B) ${q.options[1]}</label>
+                            <label><input type="radio" name="q_${q.id}" value="C"> C) ${q.options[2]}</label>
+                            <label><input type="radio" name="q_${q.id}" value="D"> D) ${q.options[3]}</label>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        // 3. SUBMIT & GRADE
+        function submitExam() {
+            if(!confirm("Submit final answers?")) return;
+
+            let score = 0;
+            const total = currentQuestions.length;
+
+            currentQuestions.forEach(q => {
+                const selected = document.querySelector(`input[name="q_${q.id}"]:checked`);
+                if (selected && selected.value === q.correct) {
+                    score++;
+                }
+            });
+
+            document.getElementById('exam-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+            document.getElementById('score-display').innerText = `You scored ${score} / ${total}`;
+        }
+    </script>
+</body>
+</html>

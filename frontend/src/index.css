@@ -1,0 +1,150 @@
+/* src/App.css */
+:root {
+  --primary: #006837; /* University Green */
+  --accent: #f39c12;  /* Gold/Yellow */
+  --light: #f4f4f4;
+  --dark: #333;
+  --white: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light);
+  color: var(--dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- LAYOUTS --- */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.portal-box {
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* --- CARDS (The 3 Landing Page Boxes) --- */
+.card-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+
+.card {
+  background: var(--white);
+  padding: 2rem;
+  width: 250px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 5px solid var(--primary);
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+/* --- FORMS & INPUTS --- */
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Fixes width issues */
+}
+
+input:focus, select:focus {
+  outline: 2px solid var(--primary);
+  border-color: transparent;
+}
+
+/* --- BUTTONS --- */
+button {
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #004d26;
+}
+
+.back-btn {
+  background-color: #666;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+/* --- ALERTS & NOTIFICATIONS --- */
+.notif-item {
+  background-color: #e8f5e9;
+  border-left: 4px solid var(--primary);
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 4px;
+}
+
+/* --- EXAM HALL --- */
+.exam-hall {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.question-card {
+  background: var(--white);
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  text-align: left;
+}
+
+.question-card label {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.question-card label:hover {
+  background-color: #f0f0f0;
+}

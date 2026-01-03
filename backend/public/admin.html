@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - NWU</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Admin Dashboard</h1>
+        <p>System Configuration Panel</p>
+    </header>
+
+    <div class="container">
+        <a href="/" class="btn" style="background-color: #666; margin-bottom: 20px;">&larr; Back to Home</a>
+
+        <div class="card">
+            <h2 style="border-bottom: 2px solid #eee; padding-bottom: 10px;">Add New Department</h2>
+            <form action="/api/add-department" method="POST">
+                <label>Select Faculty</label>
+                <select name="facultyId">
+                    <option value="1">Faculty of Science</option>
+                    <option value="2">Faculty of Arts</option>
+                    <option value="3">Faculty of Law</option>
+                    <option value="4">Faculty of Basic Medical Sciences</option>
+                </select>
+
+                <label>Department Name</label>
+                <input type="text" name="name" placeholder="e.g. Computer Science" required>
+
+                <label>Department Code</label>
+                <input type="text" name="code" placeholder="e.g. CSC" required>
+
+                <button type="submit" class="btn">Save to Database</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>System Overview</h2>
+            <p><strong>Database Status:</strong> <span style="color: green; font-weight: bold;">Active</span></p>
+            <p><strong>Current Mode:</strong> Development</p>
+        </div>
+    </div>
+
+</body>
+</html>

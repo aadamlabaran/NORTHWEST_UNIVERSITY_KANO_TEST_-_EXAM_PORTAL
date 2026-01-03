@@ -1,0 +1,35 @@
+{
+  "faculties": [
+    { "id": 1, "name": "Faculty of Science", "code": "FOS" },
+    { "id": 2, "name": "Faculty of Computing", "code": "FOC" },
+    { "id": 3, "name": "Faculty of Education", "code": "FOE" },
+    { "id": 4, "name": "Faculty of Humanities", "code": "FOH" },
+    { "id": 5, "name": "Faculty of Social & Management Sciences", "code": "SMS" },
+    { "id": 6, "name": "Faculty of Basic Medical Sciences", "code": "FBMS" },
+    { "id": 7, "name": "Faculty of Clinical Sciences", "code": "FCS" },
+    { "id": 8, "name": "Faculty of Law", "code": "FOL" }
+  ],
+  "departments": [
+    { "id": 1, "facultyId": 1, "name": "Department of Biological Sciences", "code": "BIO" },
+    { "id": 2, "facultyId": 1, "name": "Department of Chemistry", "code": "CHM" },
+    { "id": 3, "facultyId": 1, "name": "Department of Physics", "code": "PHY" },
+    { "id": 4, "facultyId": 1, "name": "Department of Mathematics & Statistics", "code": "MTH" },
+    { "id": 5, "facultyId": 2, "name": "Department of Computer Science", "code": "CSC" },
+    { "id": 6, "facultyId": 2, "name": "Department of Cyber Security", "code": "CYS" },
+    { "id": 7, "facultyId": 2, "name": "Department of Software Engineering", "code": "SWE" },
+    { "id": 8, "facultyId": 2, "name": "Department of Information Technology", "code": "IFT" },
+    { "id": 26, "facultyId": 8, "name": "Department of Public Law", "code": "PUL" }
+  ],
+  "courses": [],
+  "exams": [],
+  "students": [],
+  "lecturers": [],
+  "admins": [
+    { 
+      "id": 1, 
+      "username": "aadamlabaran", 
+      "password": "Seeker12", 
+      "role": "Super Admin" 
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+/* --- VARIABLES --- */
+:root {
+  --primary: #006837; /* NWU Green */
+  --secondary: #f39c12; /* NWU Gold */
+  --dark: #2c3e50;
+  --light: #f8f9fa;
+  --white: #ffffff;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --hover-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  background-color: var(--light);
+  color: var(--dark);
+  min-height: 100vh;
+}
+
+/* --- LAYOUT WRAPPER --- */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- HERO SECTION (THE HEADER) --- */
+.hero-section {
+  background: linear-gradient(135deg, var(--primary) 0%, #004d26 100%);
+  color: var(--white);
+  width: 100%;
+  padding: 1rem 2rem; /* Compact and professional padding */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Container for Logo + Text */
+.hero-content {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* LOGO STYLING */
+.uni-logo {
+  width: 80px;         
+  height: 80px;        
+  object-fit: contain;
+  background: white;
+  border-radius: 18px; /* Modern Soft Square */
+  padding: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+}
+
+/* TEXT STYLING (UPDATED FOR CENTER ALIGNMENT) */
+.hero-text {
+  display: flex;           /* Enable flexbox for text container */
+  flex-direction: column;  /* Stack Title and Subtitle */
+  align-items: center;     /* <--- THIS CENTERS THE SUBTITLE UNDER THE TITLE */
+  text-align: center;      /* Ensures text centers if it wraps */
+}
+
+.hero-text h1 {
+  margin: 0;
+  font-size: 2rem; 
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-family: 'Segoe UI', sans-serif; 
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.hero-text p {
+  margin: 5px 0 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 0.5px;
+  /* Since we used align-items: center above, this naturally sits in the center */
+}
+
+/* --- LANDING PAGE CARDS --- */
+.landing-container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.section-title {
+  color: var(--dark);
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+  font-weight: 600;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 3px;
+  background: var(--secondary);
+  bottom: 0;
+  left: 25%;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 20px;
+}
+
+.portal-card {
+  background: var(--white);
+  padding: 2.5rem 2rem;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-top: 5px solid transparent;
+}
+
+.student-card { border-top-color: var(--primary); }
+.lecturer-card { border-top-color: var(--secondary); }
+.admin-card { border-top-color: #34495e; }
+
+.portal-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--hover-shadow);
+}
+
+.icon {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+}
+
+.portal-card h3 {
+  margin: 10px 0;
+  color: var(--dark);
+  font-size: 1.5rem;
+}
+
+.portal-card p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+.enter-btn {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.portal-card:hover .enter-btn {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* --- PORTAL WRAPPER --- */
+.portal-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.nav-back-btn {
+  background: #eee;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.nav-back-btn:hover {
+  background: #e0e0e0;
+}
+
+.current-portal-badge {
+  background: var(--secondary);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+/* --- FOOTER --- */
+.footer {
+  background-color: var(--dark);
+  color: var(--white);
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: auto;
+}
+
+.footer p {
+  margin: 5px 0;
+}
+
+.sub-footer {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column; 
+    text-align: center;
+  }
+  .card-grid { grid-template-columns: 1fr; }
+}

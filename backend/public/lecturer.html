@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecturer Portal - NWU</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Lecturer Dashboard</h1>
+        <p>Exam & Assessment Management</p>
+    </header>
+
+    <div class="container">
+        <a href="/" class="btn" style="background-color: #666; margin-bottom: 20px;">&larr; Logout</a>
+
+        <div class="card">
+            <h2>Add New Question</h2>
+            <p>Create a multiple-choice question for a specific course.</p>
+            
+            <form action="/api/add-question" method="POST">
+                
+                <label>Course Code</label>
+                <input type="text" name="courseCode" placeholder="e.g. CSC101" required>
+
+                <label>Question</label>
+                <input type="text" name="question" placeholder="Enter the question here..." required>
+
+                <label>Options</label>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <input type="text" name="optA" placeholder="Option A" required>
+                    <input type="text" name="optB" placeholder="Option B" required>
+                    <input type="text" name="optC" placeholder="Option C" required>
+                    <input type="text" name="optD" placeholder="Option D" required>
+                </div>
+
+                <label>Correct Answer</label>
+                <select name="correct">
+                    <option value="A">Option A</option>
+                    <option value="B">Option B</option>
+                    <option value="C">Option C</option>
+                    <option value="D">Option D</option>
+                </select>
+
+                <button type="submit" class="btn">Save Question</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
